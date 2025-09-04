@@ -946,6 +946,24 @@
             element.style.display = 'block';
         }
 
+        // Password visibility toggle function
+        function togglePasswordVisibility(inputId, buttonElement) {
+            const passwordInput = document.getElementById(inputId);
+            const icon = buttonElement.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+                buttonElement.title = 'Hide password';
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+                buttonElement.title = 'Show password';
+            }
+        }
+
         function checkPasswordStrength() {
             const password = document.getElementById('signupPassword').value;
             const strengthDiv = document.getElementById('passwordStrength');
