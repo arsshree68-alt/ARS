@@ -487,7 +487,8 @@
     <div class="container" id="mainContent">
         <div class="header">
             <h1><i class="fas fa-chess-king"></i> THE ARS PLAYGROUND</h1>
-            <p>Your Personal Dashboard - Media Manager, Chess Player & More</p>
+            <p> Abhishek Raj Shrivastava, S.I. Gr. II,</p>
+            <p> Ministry of Home Affairs, Government of India </p>
         </div>
 
         <div class="dashboard">
@@ -517,6 +518,9 @@
                     <div class="link-item" onclick="openLink('https://docs.google.com/forms/u/0/')">
                         <i class="fas fa-wpforms"></i>
                         <span>Google Forms</span>
+                    <div class="link-item" onclick="openLink('https://github.com/')">
+                        <i class="fas fa-github"></i>
+                        <span>Git Hub Login</span>
                     </div>
                 </div>
             </div>
@@ -563,8 +567,8 @@
                     <button onclick="addTodo()">Add</button>
                 </div>
                 <div class="todo-section" id="todo-list"></div>
-                <button class="export-btn" onclick="exportToExcel()">
-                    <i class="fas fa-download"></i> Export This Year's Data
+                <button class="export-btn" onclick="exportToGoogleSheet()">
+                    <i class="fas fa-download"></i> Export to Google Sheet
                 </button>
             </div>
 
@@ -911,6 +915,27 @@
                 localStorage.setItem(`notes_${today}`, notes);
             }
         }, 30000);
+
+        const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbyMn5Wc4lFQR-pg5K5ppkHcu_gi5s75iRWFuut0E1wZzc6AtkPqahstABS0DFBlKFGHVg/exec
+";
+
+function exportToGoogleSheet() {
+    const todos = Array.from(document.querySelectorAll("#todo-list div"))
+        .map(item => item.innerText);
+
+    todos.forEach(task => {
+        fetch(GOOGLE_SHEET_URL, {
+            method: "POST",
+            body: JSON.stringify({ task }),
+            headers: { "Content-Type": "application/json" }
+        })
+        .then(res => res.json())
+        .then(data => console.log("Saved:", data))
+        .catch(err => console.error("Error:", err));
+    });
+
+    alert("Your tasks were sent to Google Sheet!");
+}
     </script>
 </body>
 </html>Content = 'JioSaavn opened in new tab';
